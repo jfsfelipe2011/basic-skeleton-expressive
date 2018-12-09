@@ -8,17 +8,13 @@ services:
           - mysql
         volumes:
           - ./:/var/www/html/:rw
+          
     mysql:
         image: mysql/mysql-server:5.6
         container_name: basic-expressive-mysql
         hostname: basic-expressive-mysql
-        volumes:
-          - /etc/localtime:/etc/localtime
-        environment:
-          - MYSQL_ROOT_PASSWORD=201125
-          - MYSQL_DATABASE=basic
-          - MYSQL_USER=basic
-          - MYSQL_PASSWORD=basic
+        env_file: .env
+
     composer:
         image: composer:1.5
         network_mode: host
