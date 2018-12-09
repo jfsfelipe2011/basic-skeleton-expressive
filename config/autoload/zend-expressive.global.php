@@ -9,10 +9,10 @@ return [
     // directive, to disable configuration caching. Toggling development mode
     // will also disable it by default; clear the configuration cache using
     // `composer clear-config-cache`.
-    ConfigAggregator::ENABLE_CACHE => getenv('ENABLE_CACHE'),
+    ConfigAggregator::ENABLE_CACHE => (boolean) getenv('ENABLE_CACHE'),
 
     // Enable debugging; typically used to provide debugging information within templates.
-    'debug' => getenv('DEBUG'),
+    'debug' => (boolean) getenv('DEBUG'),
 
     'zend-expressive' => [
         // Provide templates for the error handling middleware to use when

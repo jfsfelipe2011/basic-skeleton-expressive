@@ -36,8 +36,9 @@ $aggregator = new ConfigAggregator([
     //   - `*.global.php`
     //   - `local.php`
     //   - `*.local.php`
-    new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
-    
+    new PhpFileProvider(realpath(__DIR__) . '/autoload/zend-expressive.global.php'),
+    new PhpFileProvider(realpath(__DIR__) . '/autoload/db.global.php')
+
 ], $cacheConfig['config_cache_path']);
 
 return $aggregator->getMergedConfig();

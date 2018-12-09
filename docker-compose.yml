@@ -4,6 +4,7 @@ services:
         build: .
         container_name: basic-expressive-web
         hostname: basic-expressive-web
+        env_file: .env
         depends_on:
           - mysql
         volumes:

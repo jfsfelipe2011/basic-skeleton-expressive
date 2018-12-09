@@ -91,3 +91,6 @@ RUN composer global require hirak/prestissimo \
         --optimize-autoloader \
     ; \
 composer clearcache
+
+# Environment php-fpm
+RUN sed -e 's/;clear_env = no/clear_env = no/' -i /etc/php/7.2/php-fpm.d/www.conf
