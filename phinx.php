@@ -3,10 +3,10 @@
 return [
 	'paths' => [
 		'migrations' => [
-			__DIR__ . 'src/App/Database/Migration'
+			__DIR__ . '/src/App/Database/Migration'
 		],
 		'seeds' => [
-			__DIR__ . 'src/App/Database/Seed'
+			__DIR__ . '/src/App/Database/Seed'
 		]
 	],
 	'environments' => [

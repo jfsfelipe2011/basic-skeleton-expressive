@@ -19,6 +19,8 @@ ENV \
     DEPS="nginx \
         nginx-mod-http-headers-more \
         php7.2 \
+        php7.2-pdo \
+        php7.2-pdo_mysql \
         php7.2-phar \
         php7.2-bcmath \
         php7.2-calendar \
