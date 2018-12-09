@@ -4,7 +4,32 @@ services:
         build: .
         container_name: basic-expressive-web
         hostname: basic-expressive-web
-
+        depends_on:
+          - mysql
+        volumes:
+          - ./:/var/www/html/:rw
+    mysql:
+        image: mysql/mysql-server:5.6
+        container_name: basic-expressive-mysql
+        hostname: basic-expressive-mysql
+        volumes:
+          - /etc/localtime:/etc/localtime
+        environment:
+          - MYSQL_ROOT_PASSWORD=201125
+          - MYSQL_DATABASE=basic
+          - MYSQL_USER=basic
+          - MYSQL_PASSWORD=basic
+    composer:
+    image: composer:1.5
+    network_mode: host
+    container_name: basic-expressive-composer
+    user: "${UID}:${UID}"
+    command: install --prefer-dist --optimize-autoloader --ignore-platform-reqs
+    volumes:
+      - ./:/app
+      - ${HOME}:${HOME}
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
 networks:
     default:
         external:
