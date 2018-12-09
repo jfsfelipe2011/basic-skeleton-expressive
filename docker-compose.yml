@@ -20,16 +20,16 @@ services:
           - MYSQL_USER=basic
           - MYSQL_PASSWORD=basic
     composer:
-    image: composer:1.5
-    network_mode: host
-    container_name: basic-expressive-composer
-    user: "${UID}:${UID}"
-    command: install --prefer-dist --optimize-autoloader --ignore-platform-reqs
-    volumes:
-      - ./:/app
-      - ${HOME}:${HOME}
-      - /etc/passwd:/etc/passwd:ro
-      - /etc/group:/etc/group:ro
+        image: composer:1.5
+        network_mode: host
+        container_name: basic-expressive-composer
+        user: "${UID}:${UID}"
+        command: install --prefer-dist --optimize-autoloader --ignore-platform-reqs
+        volumes:
+          - ./:/app
+          - ${HOME}:${HOME}
+          - /etc/passwd:/etc/passwd:ro
+          - /etc/group:/etc/group:ro
 networks:
     default:
         external:
