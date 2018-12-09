@@ -76,11 +76,6 @@ EXPOSE 80
 
 CMD ["/sbin/runit-wrapper"]
 
-# Create a new user
-RUN addgroup -g 1000 basic && \
-    adduser -D -G basic -u 1000 basic
-USER basic
-
 COPY ./ /var/www/html
 WORKDIR /var/www/html
 
@@ -96,10 +91,3 @@ RUN composer global require hirak/prestissimo \
         --optimize-autoloader \
     ; \
 composer clearcache
-
-# Cleanup
-USER root
-RUN apk del .build-deps \
-    ; \
-    rm -rf /var/cache/apk/*
-USER basic
