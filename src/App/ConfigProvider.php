@@ -37,6 +37,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Database\DBALConnection::class => Database\Factory\DBALConnectionFactory::class
             ],
         ];
     }
