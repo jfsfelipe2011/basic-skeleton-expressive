@@ -84,7 +84,7 @@ class UserEntity implements EntityInterface
     /**
      * @return array
      */
-    public function getArrayCopy(): array 
+    public function getArrayCopy(): array
 	{
 		return [
 			'id' 	     => $this->id,
@@ -95,4 +95,14 @@ class UserEntity implements EntityInterface
 			'updated_at' => $this->updated_at
 		];
 	}
+
+    public function exchangeArray(array $data)
+    {
+        $this->id         = $data['id'];
+        $this->name       = $data['name'];
+        $this->email      = $data['email'];
+        $this->password   = $data['password'];
+        $this->created_at = $data['created_at'];
+        $this->updated_at = $data['updated_at'];
+    }
 }

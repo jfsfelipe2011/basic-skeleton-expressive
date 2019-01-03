@@ -19,4 +19,6 @@ interface EntityInterface
     public function getUpdatedAt(): string;
 
 	public function getArrayCopy(): array;
+
+	public function exchangeArray(array $data);
 }

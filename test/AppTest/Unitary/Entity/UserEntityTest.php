@@ -74,4 +74,27 @@ class UserEntityTest extends TestCase
         $this->assertEquals(6, count($reflector->getProperties()));
         $this->assertInternalType('array', $this->user->getArrayCopy());
     }
+
+    public function testExchangeArray()
+    {
+        $data = new \DateTime();
+
+        $dados = [
+            'id'          => 1,
+            'name'        => 'Usuário Teste',
+            'email'       => 'teste@email.com',
+            'password'    => 'xbh46qkhgdu',
+            'created_at'  => $data->format('Y-m-d'),
+            'updated_at'  => $data->format('Y-m-d')
+        ];
+
+        $this->user->exchangeArray($dados);
+        $this->assertInternalType('array', $this->user->getArrayCopy());
+        $this->assertEquals(1, $this->user->getId());
+        $this->assertEquals('Usuário Teste', $this->user->getName());
+        $this->assertEquals('teste@email.com', $this->user->getEmail());
+        $this->assertEquals('xbh46qkhgdu', $this->user->getPassword());
+        $this->assertEquals($data->format('Y-m-d'), $this->user->getCreatedAt());
+        $this->assertEquals($data->format('Y-m-d'), $this->user->getUpdatedAt());
+    }
 }
