@@ -84,7 +84,7 @@ class UserEntity implements EntityInterface
     /**
      * @return array
      */
-    public function getArrayCopy()
+    public function getArrayCopy(): array 
 	{
 		return [
 			'id' 	     => $this->id,
