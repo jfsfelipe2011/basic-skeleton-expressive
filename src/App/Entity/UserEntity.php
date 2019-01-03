@@ -26,7 +26,6 @@ class UserEntity implements EntityInterface
      */
     public function getName() : string
     {
-    	$t = new Teste;
         return $this->name;
     }
 
