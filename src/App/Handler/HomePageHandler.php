@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Database\Factory\DBALConfigurationFactory;
-use App\Entity\UserEntity;
+use App\Repository\UserRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -28,18 +27,26 @@ class HomePageHandler implements RequestHandlerInterface
     /** @var null|TemplateRendererInterface */
     private $template;
 
+    /** @var UserRepository */
+    private $repository;
+
     public function __construct(
         string $containerName,
         Router\RouterInterface $router,
+        UserRepository $repository,
         ?TemplateRendererInterface $template = null
     ) {
         $this->containerName = $containerName;
         $this->router        = $router;
+        $this->repository    = $repository;
         $this->template      = $template;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        echo "<pre>";
+        var_dump($this->repository->findAll());die();
+
         if ($this->template === null) {
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',

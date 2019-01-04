@@ -1,12 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jose
- * Date: 03/01/19
- * Time: 19:48
- */
 
-class RepositoryInterface
+declare(strict_types=1);
+
+namespace App\Repository;
+
+interface RepositoryInterface
 {
+    public function getTable(): string;
 
+    public function getPrimaryKey(): string;
+
+    public function getAffectedRows(): int;
+
+    public function findAll(int $limit, int $offset): array;
 }

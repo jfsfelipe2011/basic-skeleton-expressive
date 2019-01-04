@@ -36,8 +36,9 @@ class ConfigProvider
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
-                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
-                Database\DBALConnection::class => Database\Factory\DBALConnectionFactory::class
+                Handler\HomePageHandler::class    => Handler\HomePageHandlerFactory::class,
+                Database\DBALConnection::class    => Database\Factory\DBALConnectionFactory::class,
+                Repository\UserRepository::class  => Repository\Factory\UserRepositoryFactory::class
             ],
         ];
     }

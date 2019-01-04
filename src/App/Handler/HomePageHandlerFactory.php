@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Repository\UserRepository;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouterInterface;
@@ -19,7 +20,8 @@ class HomePageHandlerFactory
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
             : null;
+        $repository = $container->get(UserRepository::class);
 
-        return new HomePageHandler(get_class($container), $router, $template);
+        return new HomePageHandler(get_class($container), $router, $repository, $template);
     }
 }

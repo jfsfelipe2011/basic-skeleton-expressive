@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jose
- * Date: 03/01/19
- * Time: 20:11
- */
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
+use Doctrine\DBAL\Connection;
 
-class UserRepository
+class UserRepository extends AbstractRepository
 {
-
+    public function __construct(string $primaryKey, string $table, string $entity, Connection $connection)
+    {
+        parent::__construct($primaryKey, $table, $entity, $connection);
+    }
 }
