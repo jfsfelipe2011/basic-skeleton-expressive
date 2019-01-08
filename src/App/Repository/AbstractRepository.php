@@ -48,6 +48,8 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * retorna o nome da tabela do repositorio
+     *
      * @return string
      */
     public function getTable(): string
@@ -56,6 +58,8 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * Retorna o nome do campo chave primaria
+     *
      * @return string
      */
     public function getPrimaryKey(): string
@@ -64,6 +68,8 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * retorna a quandidade de linha afetadas
+     *
      * @return int
      */
     public function getAffectedRows(): int
@@ -72,6 +78,10 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * Busca todos os registros, pode ser página pelos parametros
+     * limit que é a quantidade de registros de retorno ou offset
+     * que é o registro de inicio da busca
+     *
      * @param int|null $limit
      * @param int|null $offset
      * @return array
@@ -83,10 +93,12 @@ abstract class AbstractRepository implements RepositoryInterface
         $queryBuilder->select('*')
                      ->from($this->getTable());
 
+        // caso tenha sido passado o parametro limit, ele seta a quantidade
         if ($limit) {
             $queryBuilder->setMaxResults($limit);
         }
 
+        // caso tenha sido passdo o parametro offset, ele seta o primeiro registro
         if ($offset) {
             $queryBuilder->setFirstResult($offset);
         }
@@ -96,6 +108,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
         $entities = array();
 
+        // transforma os resultados em entidades
         foreach ($result as $data) {
             $mappedEntity = new $this->entity;
             $mappedEntity->exchangeArray($data);

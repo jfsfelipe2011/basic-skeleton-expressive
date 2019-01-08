@@ -13,7 +13,7 @@ class GetAllUsersFormatter
      * @param array $users
      * @return array
      */
-    public function __invoke(array $users)
+    public function __invoke(array $users): array
     {
         $formatted = array();
 

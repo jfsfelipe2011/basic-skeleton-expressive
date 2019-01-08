@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
 class CreateUsersTable extends AbstractMigration
 {
-    public function up()
+    /**
+     * Método que cria a tabela de usuários
+     */
+    public function up(): void
     {
         $this->table('users')
             ->addColumn('name', 'string')
@@ -17,8 +21,12 @@ class CreateUsersTable extends AbstractMigration
             ->save();
     }
 
-    public function down()
+
+    /**
+     * Método que deleta tabela de usuários
+     */
+    public function down(): void
     {
-        $this->dropTable('users');
+        $this->table('users')->drop()->save();
     }
 }

@@ -20,7 +20,7 @@ class UserRepositoryFactory
     /** @var string  */
     const ENTITY = UserEntity::class;
 
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): UserRepository
     {
         $connection = $container->get(DBALConnection::class);
 

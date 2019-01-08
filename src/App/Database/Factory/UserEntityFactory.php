@@ -9,7 +9,14 @@ use Faker\Generator;
 
 class UserEntityFactory
 {
-	public function __invoke(Generator $faker)
+    /**
+     * Gera um usuário com dados falsos
+     *
+     * @param Generator $faker
+     * @return array
+     * @throws \Exception
+     */
+	public function __invoke(Generator $faker): array
 	{
 		$firstname = $faker->firstname;
 		$lastname  = $faker->lastname;
