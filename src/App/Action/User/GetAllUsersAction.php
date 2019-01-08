@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Action\User;
 
-use App\Action\ActionInterface;
 use App\Formatter\User\GetAllUsersFormatter;
 use App\Repository\UserRepository;
 
-class GetAllUsersAction implements ActionInterface
+class GetAllUsersAction
 {
     /** @var UserRepository */
     private $repository;
@@ -34,9 +33,9 @@ class GetAllUsersAction implements ActionInterface
      *
      * @return array
      */
-    public function action()
+    public function action(int $limit, int $offset)
     {
-        $users = $this->repository->findAll();
+        $users = $this->repository->findAll($limit, $offset);
 
         $format = $this->getFormatter();
 

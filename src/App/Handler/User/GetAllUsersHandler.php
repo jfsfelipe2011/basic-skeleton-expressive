@@ -33,6 +33,11 @@ class GetAllUsersHandler implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new JsonResponse($this->action->action());
+        $params = $request->getQueryParams();
+
+        $limit  = $params['limit'] ?? 0;
+        $offset = $params['offset'] ?? 0;
+
+        return new JsonResponse($this->action->action((int) $limit, (int) $offset));
     }
 }
