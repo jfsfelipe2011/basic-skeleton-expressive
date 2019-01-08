@@ -33,7 +33,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\PingHandler::class => Handler\PingHandler::class,
+                Handler\PingHandler::class                  => Handler\PingHandler::class,
+                Formatter\User\GetAllUsersFormatter::class  => Formatter\User\GetAllUsersFormatter::class
             ],
             'factories'  => [
                 Handler\HomePageHandler::class    => Handler\HomePageHandlerFactory::class,
