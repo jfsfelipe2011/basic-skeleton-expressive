@@ -21,9 +21,6 @@ require 'vendor/autoload.php';
     $app = $container->get(\Zend\Expressive\Application::class);
     $factory = $container->get(\Zend\Expressive\MiddlewareFactory::class);
 
-    $teste = $container->get(App\Formatter\User\GetAllUsersFormatter::class);
-    var_dump($teste(array()));die();
-
     // Execute programmatic/declarative middleware pipeline and routing
     // configuration statements
     (require 'config/pipeline.php')($app, $factory, $container);

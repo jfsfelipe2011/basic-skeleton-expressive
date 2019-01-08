@@ -2,7 +2,8 @@
 
 namespace App\Formatter\User;
 
-use User\Entity\User;
+
+use App\Entity\UserEntity;
 
 class GetAllUsersFormatter
 {
@@ -18,11 +19,11 @@ class GetAllUsersFormatter
 
         foreach ($users as $user)
         {
-            if (!$user instanceof User) {
+            if (!$user instanceof UserEntity) {
                 continue;
             }
 
-            array_push($formatted, $user->toArray());
+            array_push($formatted, $user->getArrayCopy());
         }
 
         return $formatted;

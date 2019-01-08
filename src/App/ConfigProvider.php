@@ -37,9 +37,11 @@ class ConfigProvider
                 Formatter\User\GetAllUsersFormatter::class  => Formatter\User\GetAllUsersFormatter::class
             ],
             'factories'  => [
-                Handler\HomePageHandler::class    => Handler\HomePageHandlerFactory::class,
-                Database\DBALConnection::class    => Database\Factory\DBALConnectionFactory::class,
-                Repository\UserRepository::class  => Repository\Factory\UserRepositoryFactory::class
+                Handler\HomePageHandler::class         => Handler\HomePageHandlerFactory::class,
+                Database\DBALConnection::class         => Database\Factory\DBALConnectionFactory::class,
+                Repository\UserRepository::class       => Repository\Factory\UserRepositoryFactory::class,
+                Action\User\GetAllUsersAction::class   => Action\User\Factory\GetAllUsersActionFactory::class,
+                Handler\User\GetAllUsersHandler::class => Handler\User\Factory\GetAllUsersHandlerFactory::class
             ],
         ];
     }
