@@ -6,8 +6,9 @@ namespace AppTest\Integration\Repository;
 
 use App\Entity\UserEntity;
 use App\Repository\UserRepository;
+use AppTest\Integration\AbstractTestIntegration;
 
-class UserRepositoryTest extends AbstractRepositoryTest
+class UserRepositoryTest extends AbstractTestIntegration
 {
     /** @var string  */
     const PRIMARY_KEY = 'id';

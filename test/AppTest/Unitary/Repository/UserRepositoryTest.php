@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AppTest\Unitary\Repository;
 
 use App\Repository\UserRepository;
+use Faker\Generator;
 use PHPUnit\Framework\TestCase;
 use Faker\Factory as Faker;
 
@@ -13,6 +14,7 @@ class UserRepositoryTest extends TestCase
     /** @var UserRepository */
     private $repository;
 
+    /** @var Generator */
     private $faker;
 
     protected function setUp()

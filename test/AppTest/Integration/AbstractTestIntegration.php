@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Integration\Repository;
+namespace AppTest\Integration;
 
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use PHPUnit\Framework\TestCase;
 
-class AbstractRepositoryTest extends TestCase
+class AbstractTestIntegration extends TestCase
 {
     /** @var Connection */
     protected $connection;
