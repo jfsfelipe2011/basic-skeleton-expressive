@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Formatter\User;
 
-
 use App\Entity\UserEntity;
+use App\Formatter\FormatterInterface;
 
-class GetAllUsersFormatter
+class GetAllUsersFormatter implements FormatterInterface
 {
     /**
      * Formata os usuários como array
@@ -13,11 +15,11 @@ class GetAllUsersFormatter
      * @param array $users
      * @return array
      */
-    public function __invoke(array $users): array
+    public function format($data): array
     {
         $formatted = array();
 
-        foreach ($users as $user)
+        foreach ($data as $user)
         {
             if (!$user instanceof UserEntity) {
                 continue;

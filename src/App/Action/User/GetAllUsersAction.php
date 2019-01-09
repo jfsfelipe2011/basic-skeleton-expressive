@@ -37,18 +37,6 @@ class GetAllUsersAction
     {
         $users = $this->repository->findAll($limit, $offset);
 
-        $format = $this->getFormatter();
-
-        return $format($users);
-    }
-
-    /**
-     * Retorna o formatador da classe
-     *
-     * @return GetAllUsersFormatter
-     */
-    private function getFormatter()
-    {
-        return $this->formatter;
+        return $this->formatter->format($users);
     }
 }

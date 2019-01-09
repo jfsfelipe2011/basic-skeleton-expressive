@@ -10,6 +10,8 @@ class UserSeeder extends AbstractSeed
 {
     /**
      * Método que insere dados de teste no banco
+     *
+     * @throws Exception
      */
     public function run(): void
     {
@@ -18,7 +20,7 @@ class UserSeeder extends AbstractSeed
 
         foreach (range(1, 20) as $value) {
             $user = new UserEntityFactory;
-            $table->insert($user($faker))->save();
+            $table->insert($user($faker, 'array'))->save();
         }
     }
 }

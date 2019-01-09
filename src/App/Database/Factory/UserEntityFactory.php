@@ -13,10 +13,10 @@ class UserEntityFactory
      * Gera um usuário com dados falsos
      *
      * @param Generator $faker
-     * @return array
+     * @return array | UserEntity
      * @throws \Exception
      */
-	public function __invoke(Generator $faker): array
+	public function __invoke(Generator $faker, string $tipo)
 	{
 		$firstname = $faker->firstname;
 		$lastname  = $faker->lastname;
@@ -26,6 +26,10 @@ class UserEntityFactory
 			->setEmail($firstname . '.' . $lastname . '@teste.com')
 			->setPassword(md5($faker->word))
 			->setCreatedAt((new \DateTime)->format('Y-m-d H:i:s'));
+
+		if ($tipo === 'objeto') {
+		    return $user;
+        }
 
 		return $user->getArrayCopy();
 	}
