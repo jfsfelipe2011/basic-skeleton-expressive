@@ -9,17 +9,17 @@ use App\Entity\EntityTrait\Timestamps;
 
 class UserEntity implements EntityInterface
 {
-	use Id,
-		Timestamps;
+    use Id,
+        Timestamps;
 
-	/** @var string */
-	protected $name;
+    /** @var string */
+    protected $name;
 
-	/** @var string */
-	protected $email;
+    /** @var string */
+    protected $email;
 
-	/** @var string */
-	protected $password;
+    /** @var string */
+    protected $password;
 
     /**
      * @return string
@@ -85,16 +85,16 @@ class UserEntity implements EntityInterface
      * @return array
      */
     public function getArrayCopy(): array
-	{
-		return [
-			'id' 	     => $this->id,
-			'name'       => $this->name,
-			'email'      => $this->email,
-			'password'   => $this->password,
-			'created_at' => $this->created_at,
-			'updated_at' => $this->updated_at
-		];
-	}
+    {
+        return [
+            'id'         => $this->id,
+            'name'       => $this->name,
+            'email'      => $this->email,
+            'password'   => $this->password,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
+        ];
+    }
 
     public function exchangeArray(array $data)
     {

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Entity\EntityTrait;
 
-trait Timestamps 
+trait Timestamps
 {
-	/** @var \string */
-	protected $created_at;
+    /** @var \string */
+    protected $created_at;
 
-	/** @var \string */
-	protected $updated_at;
+    /** @var \string */
+    protected $updated_at;
 
     /**
      * @return \string

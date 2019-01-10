@@ -17,11 +17,13 @@ class DBALConnectionFactory
      * @return Connection
      * @throws \Doctrine\DBAL\DBALException
      */
-	public function __invoke(ContainerInterface $container): Connection
-	{
-		$dbal = new DBALConnection($container->get('config')['default_connection'],
-			$container->get(\Doctrine\DBAL\Configuration::class));
+    public function __invoke(ContainerInterface $container): Connection
+    {
+        $dbal = new DBALConnection(
+            $container->get('config')['default_connection'],
+            $container->get(\Doctrine\DBAL\Configuration::class)
+        );
 
-		return $dbal->getConnection();
-	}
+        return $dbal->getConnection();
+    }
 }

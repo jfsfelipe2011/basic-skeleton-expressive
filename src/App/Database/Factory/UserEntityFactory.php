@@ -16,21 +16,21 @@ class UserEntityFactory
      * @return array | UserEntity
      * @throws \Exception
      */
-	public function __invoke(Generator $faker, string $tipo)
-	{
-		$firstname = $faker->firstname;
-		$lastname  = $faker->lastname;
+    public function __invoke(Generator $faker, string $tipo)
+    {
+        $firstname = $faker->firstname;
+        $lastname  = $faker->lastname;
 
-		$user = (new UserEntity)
-			->setName($firstname . ' ' . $lastname)
-			->setEmail($firstname . '.' . $lastname . '@teste.com')
-			->setPassword(md5($faker->word))
-			->setCreatedAt((new \DateTime)->format('Y-m-d H:i:s'));
+        $user = (new UserEntity)
+            ->setName($firstname . ' ' . $lastname)
+            ->setEmail($firstname . '.' . $lastname . '@teste.com')
+            ->setPassword(md5($faker->word))
+            ->setCreatedAt((new \DateTime)->format('Y-m-d H:i:s'));
 
-		if ($tipo === 'objeto') {
-		    return $user;
+        if ($tipo === 'objeto') {
+            return $user;
         }
 
-		return $user->getArrayCopy();
-	}
+        return $user->getArrayCopy();
+    }
 }
