@@ -33,10 +33,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\PingHandler::class                  => Handler\PingHandler::class
             ],
             'factories'  => [
-                Handler\HomePageHandler::class             => Handler\HomePageHandlerFactory::class,
                 Database\DBALConnection::class             => Database\Factory\DBALConnectionFactory::class,
                 Repository\UserRepository::class           => Repository\Factory\UserRepositoryFactory::class,
                 Formatter\User\GetAllUsersFormatter::class => Formatter\User\Factory\GetAllUsersFormatterFactory::class,
