@@ -11,8 +11,8 @@ class DBALConfigurationFactory
      *
      * @return Configuration
      */
-	public function __invoke() : Configuration
-	{
-		return new Configuration();
-	}
+    public function __invoke() : Configuration
+    {
+        return new Configuration();
+    }
 }

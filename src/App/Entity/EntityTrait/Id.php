@@ -6,8 +6,8 @@ namespace App\Entity\EntityTrait;
 
 trait Id
 {
-	/** @var int */
-	protected $id;
+    /** @var int */
+    protected $id;
 
     /**
      * @return int

@@ -106,7 +106,7 @@ abstract class AbstractRepository implements RepositoryInterface
         $stmt = $queryBuilder->execute();
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $entities = array();
+        $entities = [];
 
         // transforma os resultados em entidades
         foreach ($result as $data) {

@@ -11,10 +11,10 @@ use Doctrine\DBAL\DriverManager;
 class DBALConnection implements ConnectionInterface
 {
     /** @var array */
-	private $connectionParams;
+    private $connectionParams;
 
-	/** @var Configuration */
-	private $config;
+    /** @var Configuration */
+    private $config;
 
     /**
      * DBALConnection constructor.
@@ -22,18 +22,18 @@ class DBALConnection implements ConnectionInterface
      * @param array $connectionParams
      * @param Configuration $config
      */
-	public function __construct(array $connectionParams, Configuration $config)
-	{
-		$this->connectionParams = $connectionParams;
-		$this->config = $config;
-	}
+    public function __construct(array $connectionParams, Configuration $config)
+    {
+        $this->connectionParams = $connectionParams;
+        $this->config = $config;
+    }
 
     /**
      * @return Connection
      * @throws \Doctrine\DBAL\DBALException
      */
-	public function getConnection(): Connection
-	{
-		return DriverManager::getConnection($this->connectionParams, $this->config);
-	}
+    public function getConnection(): Connection
+    {
+        return DriverManager::getConnection($this->connectionParams, $this->config);
+    }
 }
