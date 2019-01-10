@@ -58,4 +58,23 @@ class UserRepositoryTest extends AbstractTestIntegration
             ['limit' => 20, 'offset' => 15, 'expected' => 5]
         ];
     }
+
+    /**
+     * Testa a busca de um usuário
+     */
+    public function testFindUser()
+    {
+        $id = mt_rand(1, 10);
+
+        $user = $this->repository->find($id);
+
+        $this->assertInstanceOf(UserEntity::class, $user);
+        $this->assertEquals($id, $user->getId());
+        $this->assertTrue(property_exists($user, 'id'));
+        $this->assertTrue(property_exists($user, 'name'));
+        $this->assertTrue(property_exists($user, 'email'));
+        $this->assertTrue(property_exists($user, 'password'));
+        $this->assertTrue(property_exists($user, 'created_at'));
+        $this->assertTrue(property_exists($user, 'updated_at'));
+    }
 }

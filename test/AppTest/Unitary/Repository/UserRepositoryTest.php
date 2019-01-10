@@ -21,7 +21,7 @@ class UserRepositoryTest extends TestCase
     {
         $this->repository = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
-            ->setMethods(['findAll'])
+            ->setMethods(['findAll', 'find'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -94,5 +94,49 @@ class UserRepositoryTest extends TestCase
             ['quantidade' => 10, 'limit' => 0, 'offset' => 5, 'expected' => 5],
             ['quantidade' => 10, 'limit' => 5, 'offset' => 5, 'expected' => 0]
         ];
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testFindUser()
+    {
+        $id = $this->faker->randomDigit();
+
+        $this->repository->method('find')
+            ->willReturn($this->createUser($id));
+
+        $user = $this->repository->find($id);
+
+        $this->assertEquals($id, $user->id);
+        $this->assertTrue(property_exists($user, 'id'));
+        $this->assertTrue(property_exists($user, 'name'));
+        $this->assertTrue(property_exists($user, 'email'));
+        $this->assertTrue(property_exists($user, 'password'));
+        $this->assertTrue(property_exists($user, 'created_at'));
+        $this->assertTrue(property_exists($user, 'updated_at'));
+    }
+
+    /**
+     * Create mock user
+     *
+     * @param int $id
+     * @return \stdClass
+     * @throws \Exception
+     */
+    private function createUser(int $id)
+    {
+        $firstname = $this->faker->firstname;
+        $lastname  = $this->faker->lastname;
+
+        $user = new \stdClass();
+        $user->id         = $id;
+        $user->name       = $firstname . ' ' . $lastname;
+        $user->email      = $firstname . '.' . $lastname . '@teste.com';
+        $user->password   = md5($this->faker->word);
+        $user->created_at = (new \DateTime)->format('Y-m-d H:i:s');
+        $user->updated_at = null;
+
+        return $user;
     }
 }

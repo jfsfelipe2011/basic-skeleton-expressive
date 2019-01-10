@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
@@ -78,6 +79,19 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * @return QueryBuilder
+     */
+    private function getSelectBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $queryBuilder->select('*')
+            ->from($this->getTable());
+
+        return $queryBuilder;
+    }
+
+    /**
      * Busca todos os registros, pode ser página pelos parametros
      * limit que é a quantidade de registros de retorno ou offset
      * que é o registro de inicio da busca
@@ -88,10 +102,7 @@ abstract class AbstractRepository implements RepositoryInterface
      */
     public function findAll(int $limit = null, int $offset = null): array
     {
-        $queryBuilder = $this->connection->createQueryBuilder();
-
-        $queryBuilder->select('*')
-                     ->from($this->getTable());
+        $queryBuilder = $this->getSelectBuilder();
 
         // caso tenha sido passado o parametro limit, ele seta a quantidade
         if ($limit) {
@@ -117,5 +128,28 @@ abstract class AbstractRepository implements RepositoryInterface
         }
 
         return $entities;
+    }
+
+    /**
+     * Busca o registro tendo em relação a chave primaria
+     * da entidade
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function find(int $id)
+    {
+        $queryBuilder = $this->getSelectBuilder();
+
+        $queryBuilder->where($this->getPrimaryKey() . ' = :id');
+        $queryBuilder->setParameter('id', $id);
+
+        $stmt = $queryBuilder->execute();
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        $mappedEntity = new $this->entity;
+        $mappedEntity->exchangeArray($data);
+
+        return $mappedEntity;
     }
 }

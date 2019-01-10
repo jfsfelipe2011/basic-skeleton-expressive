@@ -98,7 +98,7 @@ class UserEntity implements EntityInterface
 
     public function exchangeArray(array $data)
     {
-        $this->id         = $data['id'];
+        $this->id         = (int) $data['id'];
         $this->name       = $data['name'];
         $this->email      = $data['email'];
         $this->password   = $data['password'];
