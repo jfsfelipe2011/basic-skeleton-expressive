@@ -21,8 +21,7 @@ class ConfigProvider
     public function __invoke() : array
     {
         return [
-            'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
+            'dependencies' => $this->getDependencies()
         ];
     }
 
@@ -35,25 +34,20 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+                // Configurations
                 Database\DBALConnection::class             => Database\Factory\DBALConnectionFactory::class,
-                Repository\UserRepository::class           => Repository\Factory\UserRepositoryFactory::class,
-                Formatter\User\GetAllUsersFormatter::class => Formatter\User\Factory\GetAllUsersFormatterFactory::class,
-                Action\User\GetAllUsersAction::class       => Action\User\Factory\GetAllUsersActionFactory::class,
-                Handler\User\GetAllUsersHandler::class     => Handler\User\Factory\GetAllUsersHandlerFactory::class
-            ],
-        ];
-    }
 
-    /**
-     * Returns the templates configuration
-     */
-    public function getTemplates() : array
-    {
-        return [
-            'paths' => [
-                'app'    => ['templates/app'],
-                'error'  => ['templates/error'],
-                'layout' => ['templates/layout'],
+                // Repositories
+                Repository\UserRepository::class           => Repository\Factory\UserRepositoryFactory::class,
+
+                // Formatter
+                Formatter\User\GetAllUsersFormatter::class => Formatter\User\Factory\GetAllUsersFormatterFactory::class,
+
+                // Actions
+                Action\User\GetAllUsersAction::class       => Action\User\Factory\GetAllUsersActionFactory::class,
+
+                // Handlers
+                Handler\User\GetAllUsersHandler::class     => Handler\User\Factory\GetAllUsersHandlerFactory::class
             ],
         ];
     }
