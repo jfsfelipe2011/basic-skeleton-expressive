@@ -45,9 +45,11 @@ class ConfigProvider
 
                 // Actions
                 Action\User\GetAllUsersAction::class       => Action\User\Factory\GetAllUsersActionFactory::class,
+                Action\User\GetUserAction::class           => Action\User\Factory\GetUserActionFactory::class,
 
                 // Handlers
-                Handler\User\GetAllUsersHandler::class     => Handler\User\Factory\GetAllUsersHandlerFactory::class
+                Handler\User\ListUsersHandler::class       => Handler\User\Factory\ListUsersHandlerFactory::class,
+                Handler\User\ShowUserHandler::class        => Handler\User\Factory\ShowUserHandlerFactory::class
             ],
         ];
     }

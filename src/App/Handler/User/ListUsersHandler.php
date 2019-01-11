@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class GetAllUsersHandler implements RequestHandlerInterface
+class ListUsersHandler implements RequestHandlerInterface
 {
     /** @var GetAllUsersAction  */
     private $action;
