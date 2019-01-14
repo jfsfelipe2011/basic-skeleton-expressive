@@ -38,6 +38,13 @@ class ListUsersHandler implements RequestHandlerInterface
         $limit  = $params['limit'] ?? 0;
         $offset = $params['offset'] ?? 0;
 
-        return new JsonResponse($this->action->action((int) $limit, (int) $offset));
+        $users = $this->action->action((int) $limit, (int) $offset);
+
+        if (count($users) === 0) {
+            return new JsonResponse(
+                ['mensagem' => 'Nenhum usuário encontrado']
+            , 404);
+        }
+        return new JsonResponse($users);
     }
 }

@@ -147,6 +147,10 @@ abstract class AbstractRepository implements RepositoryInterface
         $stmt = $queryBuilder->execute();
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+        if (!$data) {
+            return false;
+        }
+
         $mappedEntity = new $this->entity;
         $mappedEntity->exchangeArray($data);
 

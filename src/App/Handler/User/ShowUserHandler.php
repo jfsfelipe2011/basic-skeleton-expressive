@@ -8,6 +8,7 @@ use App\Action\User\GetUserAction;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Diactoros\Response\JsonResponse;
 
 class ShowUserHandler implements RequestHandlerInterface
 {
@@ -27,6 +28,14 @@ class ShowUserHandler implements RequestHandlerInterface
     {
         $id = $request->getAttribute('id');
 
-        var_dump($id);
+        $user = $this->action->action((int) $id);
+
+        if (!$user) {
+            return new JsonResponse([
+                'mensagem' => 'Usuário não encontrado'
+            ], 404);
+        }
+
+        return new JsonResponse($user);
     }
 }

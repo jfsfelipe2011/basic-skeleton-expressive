@@ -31,6 +31,10 @@ class GetUserAction
     {
         $user = $this->repository->find($id);
 
+        if (!$user) {
+            return false;
+        }
+
         return $user->getArrayCopy();
     }
 }
