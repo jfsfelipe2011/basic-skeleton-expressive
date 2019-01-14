@@ -67,7 +67,7 @@ class GetAllUsersActionTest extends AbstractTestIntegration
         return [
             ['limit' => 20, 'offset' => 0, 'expected' => 20],
             ['limit' => 10, 'offset' => 0, 'expected' => 10],
-            ['limit' => 20, 'offset' => 10, 'expected' => 10]
+            ['limit' => 10, 'offset' => 10, 'expected' => 10]
         ];
     }
 }
