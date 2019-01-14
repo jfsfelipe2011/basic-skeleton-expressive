@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Unitary\Action;
+namespace AppTest\Unitary\Action\User;
 
 use App\Action\User\GetAllUsersAction;
 use App\Database\Factory\UserEntityFactory;

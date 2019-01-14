@@ -40,7 +40,7 @@ class ListUsersHandler implements RequestHandlerInterface
 
         $users = $this->action->action((int) $limit, (int) $offset);
 
-        if (count($users) === 0) {
+        if (empty($users)) {
             return new JsonResponse(
                 ['mensagem' => 'Nenhum usuário encontrado']
             , 404);

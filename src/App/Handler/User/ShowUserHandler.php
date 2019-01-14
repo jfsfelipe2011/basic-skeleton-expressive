@@ -24,6 +24,12 @@ class ShowUserHandler implements RequestHandlerInterface
         $this->action = $action;
     }
 
+    /**
+     * Mostra o usuário passado por parametro
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id = $request->getAttribute('id');
