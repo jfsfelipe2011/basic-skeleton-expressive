@@ -11,4 +11,7 @@ interface RepositoryInterface
 
     /** Método que deve retornar um registro */
     public function find(int $id);
+
+    /** Método que deve criar um registro */
+    public function create(array $data, array $types);
 }

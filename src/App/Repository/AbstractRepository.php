@@ -156,4 +156,29 @@ abstract class AbstractRepository implements RepositoryInterface
 
         return $mappedEntity;
     }
+
+    /**
+     * Cria um novo registro
+     *
+     * @param array $data
+     * @param array $types
+     * @return array|bool
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function create(array $data, array $types = array())
+    {
+        if (empty($data)) {
+            return false;
+        }
+
+        $this->affectedRows = $this->connection->insert($this->getTable(), $data, $types);
+
+        if (!$this->affectedRows) {
+            return false;
+        }
+
+        $data['id'] = $this->connection->lastInsertId();
+
+        return $data;
+    }
 }
