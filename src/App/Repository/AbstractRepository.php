@@ -171,14 +171,18 @@ abstract class AbstractRepository implements RepositoryInterface
             return false;
         }
 
-        $this->affectedRows = $this->connection->insert($this->getTable(), $data, $types);
+        $entity = new $this->entity;
+        $entity->exchangeArray($data);
+
+        $this->affectedRows = $this->connection->insert($this->getTable(), $entity->getArrayCopy(), $types);
 
         if (!$this->affectedRows) {
             return false;
         }
 
-        $data['id'] = $this->connection->lastInsertId();
+        $entity = $entity->getArrayCopy();
+        $entity['id'] = $this->connection->lastInsertId();
 
-        return $data;
+        return $entity;
     }
 }

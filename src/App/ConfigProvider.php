@@ -40,16 +40,20 @@ class ConfigProvider
                 // Repositories
                 Repository\UserRepository::class           => Repository\Factory\UserRepositoryFactory::class,
 
-                // Formatter
-                Formatter\User\GetAllUsersFormatter::class => Formatter\User\Factory\GetAllUsersFormatterFactory::class,
+                // Formatters
+                Formatter\User\GetAllUsersFormatter::class       => Formatter\User\Factory\GetAllUsersFormatterFactory::class,
+                Formatter\Validation\ErrorArrayFormatter::class  => Formatter\Validation\Factory\ErrorArrayFormatterFactory::class,
+                Formatter\Validation\ErrorStringFormatter::class => Formatter\Validation\Factory\ErrorStringFormatterFactory::class,
 
                 // Actions
                 Action\User\GetAllUsersAction::class       => Action\User\Factory\GetAllUsersActionFactory::class,
                 Action\User\GetUserAction::class           => Action\User\Factory\GetUserActionFactory::class,
+                Action\User\InsertUserAction::class        => Action\User\Factory\InsertUserActionFactory::class,
 
                 // Handlers
                 Handler\User\ListUsersHandler::class       => Handler\User\Factory\ListUsersHandlerFactory::class,
-                Handler\User\ShowUserHandler::class        => Handler\User\Factory\ShowUserHandlerFactory::class
+                Handler\User\ShowUserHandler::class        => Handler\User\Factory\ShowUserHandlerFactory::class,
+                Handler\User\CreateUserHandler::class      => Handler\User\Factory\CreateUserHandlerFactory::class
             ],
         ];
     }

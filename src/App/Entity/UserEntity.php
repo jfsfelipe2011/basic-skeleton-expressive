@@ -87,7 +87,7 @@ class UserEntity implements EntityInterface
     public function getArrayCopy(): array
     {
         return [
-            'id'         => $this->id,
+            'id'         => (int) $this->id,
             'name'       => $this->name,
             'email'      => $this->email,
             'password'   => $this->password,
@@ -98,7 +98,7 @@ class UserEntity implements EntityInterface
 
     public function exchangeArray(array $data)
     {
-        $this->id         = (int) $data['id'];
+        $this->id         = $data['id'] ?? null;
         $this->name       = $data['name'];
         $this->email      = $data['email'];
         $this->password   = $data['password'];

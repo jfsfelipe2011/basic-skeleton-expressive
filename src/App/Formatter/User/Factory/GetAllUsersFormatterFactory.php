@@ -9,7 +9,11 @@ use Psr\Container\ContainerInterface;
 
 class GetAllUsersFormatterFactory
 {
-    public function __invoke(ContainerInterface $container)
+    /**
+     * @param ContainerInterface $container
+     * @return GetAllUsersFormatter
+     */
+    public function __invoke(ContainerInterface $container): GetAllUsersFormatter
     {
         return new GetAllUsersFormatter();
     }

@@ -35,4 +35,5 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/users', App\Handler\User\ListUsersHandler::class, 'users.list');
     $app->get('/users/{id:[0-9]+}', App\Handler\User\ShowUserHandler::class, 'users.show');
+    $app->post('/users', App\Handler\User\CreateUserHandler::class, 'users.create');
 };
