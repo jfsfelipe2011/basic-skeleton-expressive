@@ -19,9 +19,17 @@ class ErrorStringFormatter implements FormatterInterface
         $stringErros = '';
 
         foreach ($data as $field => $validator) {
+            if (!is_array($validator)) {
+                continue;
+            }
+
             foreach ($validator as $erro) {
                 $stringErros .= $field . '-' .$erro . ',';
             }
+        }
+
+        if (empty($stringErros)) {
+            return $stringErros;
         }
 
         return substr($stringErros, 0, -1);

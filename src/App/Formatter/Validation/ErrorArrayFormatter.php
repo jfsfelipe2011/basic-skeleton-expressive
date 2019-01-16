@@ -8,17 +8,29 @@ use App\Formatter\FormatterInterface;
 
 class ErrorArrayFormatter implements FormatterInterface
 {
-
+    /**
+     * @param $data
+     * @return array
+     */
     public function format($data): array
     {
-        $mensages = array();
+        $messages = array();
+        $data = explode(',', $data);
 
-        foreach (explode(',', $data) as $key => $message) {
-            $arrayMessage = explode('-', $message);
-
-            $mensages['errors'][$arrayMessage[0]][] = $arrayMessage[1];
+        if (empty($data)) {
+            return $messages;
         }
 
-        return $mensages;
+        foreach ($data as $key => $message) {
+            $arrayMessage = explode('-', $message);
+
+            if (count($arrayMessage) < 2) {
+                continue;
+            }
+
+            $messages['errors'][$arrayMessage[0]][] = $arrayMessage[1];
+        }
+
+        return $messages;
     }
 }
