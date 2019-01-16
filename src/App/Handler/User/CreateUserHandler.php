@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler\User;
 
-use App\Action\User\InsertUserAction;
+use App\Action\User\AddUserAction;
 use App\Formatter\Validation\ErrorArrayFormatter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,7 +13,7 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class CreateUserHandler implements RequestHandlerInterface
 {
-    /** @var InsertUserAction */
+    /** @var AddUserAction */
     private $action;
 
     /** @var ErrorArrayFormatter */
@@ -22,10 +22,10 @@ class CreateUserHandler implements RequestHandlerInterface
     /**
      * CreateUserHandler constructor.
      *
-     * @param InsertUserAction $action
+     * @param AddUserAction $action
      * @param ErrorArrayFormatter $formatter
      */
-    public function __construct(InsertUserAction $action, ErrorArrayFormatter $formatter)
+    public function __construct(AddUserAction $action, ErrorArrayFormatter $formatter)
     {
         $this->action = $action;
         $this->formatter = $formatter;

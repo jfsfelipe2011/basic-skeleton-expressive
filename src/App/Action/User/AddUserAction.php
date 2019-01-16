@@ -8,7 +8,7 @@ use App\Filter\UserFilter;
 use App\Formatter\Validation\ErrorStringFormatter;
 use App\Repository\UserRepository;
 
-class InsertUserAction
+class AddUserAction
 {
     /** @var UserRepository */
     private $repository;

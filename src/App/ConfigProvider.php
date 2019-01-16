@@ -48,7 +48,7 @@ class ConfigProvider
                 // Actions
                 Action\User\GetAllUsersAction::class       => Action\User\Factory\GetAllUsersActionFactory::class,
                 Action\User\GetUserAction::class           => Action\User\Factory\GetUserActionFactory::class,
-                Action\User\InsertUserAction::class        => Action\User\Factory\InsertUserActionFactory::class,
+                Action\User\AddUserAction::class           => Action\User\Factory\AddUserActionFactory::class,
 
                 // Handlers
                 Handler\User\ListUsersHandler::class       => Handler\User\Factory\ListUsersHandlerFactory::class,
