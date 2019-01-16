@@ -31,6 +31,12 @@ class CreateUserHandler implements RequestHandlerInterface
         $this->formatter = $formatter;
     }
 
+    /**
+     * Faz a criação de um usuário
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getParsedBody();

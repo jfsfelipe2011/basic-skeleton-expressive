@@ -13,5 +13,5 @@ interface RepositoryInterface
     public function find(int $id);
 
     /** Método que deve criar um registro */
-    public function create(array $data, array $types);
+    public function insert(array $data, array $types);
 }

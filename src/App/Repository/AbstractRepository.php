@@ -158,14 +158,14 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Cria um novo registro
+     * Insere um novo registro
      *
      * @param array $data
      * @param array $types
      * @return array|bool
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function create(array $data, array $types = array())
+    public function insert(array $data, array $types = array())
     {
         if (empty($data)) {
             return false;

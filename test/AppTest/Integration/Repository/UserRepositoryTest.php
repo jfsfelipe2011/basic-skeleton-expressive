@@ -91,12 +91,12 @@ class UserRepositoryTest extends AbstractTestIntegration
      *
      * @throws \Exception
      */
-    public function testCreateUser()
+    public function testInsertUser()
     {
         $userFactory = new UserEntityFactory();
         $data = $userFactory($this->faker, 'array');
 
-        $userCreate = $this->repository->create($data);
+        $userCreate = $this->repository->insert($data);
 
         $user = $this->repository->find((int) $userCreate['id']);
 

@@ -54,7 +54,7 @@ class InsertUserAction
         $data = $this->filter->getValues();
         $data['password'] = md5($data['password']);
 
-        $user = $this->repository->create($data);
+        $user = $this->repository->insert($data);
 
         if (!$user) {
             throw new \RuntimeException('Erro ao adicionar usuário');

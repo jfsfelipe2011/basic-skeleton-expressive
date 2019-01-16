@@ -22,7 +22,7 @@ class UserRepositoryTest extends TestCase
     {
         $this->repository = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
-            ->setMethods(['findAll', 'find', 'create'])
+            ->setMethods(['findAll', 'find', 'insert'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -145,7 +145,7 @@ class UserRepositoryTest extends TestCase
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Exception
      */
-    public function testCreateUser()
+    public function testInsertUser()
     {
         $id = $this->faker->randomDigit();
 
@@ -153,10 +153,10 @@ class UserRepositoryTest extends TestCase
         $userMock = $userFactory($this->faker, 'array');
         $userMock['id'] = $id;
 
-        $this->repository->method('create')
+        $this->repository->method('insert')
             ->willReturn($userMock);
 
-        $user = $this->repository->create([]);
+        $user = $this->repository->insert([]);
 
         $this->assertEquals($id, $user['id']);
         $this->assertTrue(array_key_exists('name', $user));
