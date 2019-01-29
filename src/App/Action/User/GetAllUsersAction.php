@@ -33,7 +33,7 @@ class GetAllUsersAction
      *
      * @return array
      */
-    public function action(int $limit, int $offset)
+    public function action(int $limit, int $offset): array
     {
         $users = $this->repository->findAll($limit, $offset);
 

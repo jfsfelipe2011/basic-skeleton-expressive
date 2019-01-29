@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class GetAllUsersHandlerTest extends TestCase
+class ListUsersHandlerTest extends TestCase
 {
     /** @var GetAllUsersAction */
     private $action;
@@ -25,12 +25,12 @@ class GetAllUsersHandlerTest extends TestCase
      */
     public function testReturnsJsonResponseGetAllUsersHandler()
     {
-        $getAllUsers = new ListUsersHandler($this->action->reveal());
+        $listUsers = new ListUsersHandler($this->action->reveal());
 
         /** @var ServerRequestInterface $request */
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
 
-        $response = $getAllUsers->handle($request);
+        $response = $listUsers->handle($request);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
     }

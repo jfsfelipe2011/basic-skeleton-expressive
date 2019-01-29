@@ -6,10 +6,11 @@ namespace AppTest\Handler\User;
 
 use App\Action\User\GetUserAction;
 use App\Handler\User\ShowUserHandler;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class ShowUserHandlerTest
+class ShowUserHandlerTest extends TestCase
 {
     /** @var GetUserAction */
     private $action;
@@ -24,12 +25,12 @@ class ShowUserHandlerTest
      */
     public function testReturnsJsonResponseGetUserHandler()
     {
-        $getUser = new ShowUserHandler($this->action->reveal());
+        $showUser = new ShowUserHandler($this->action->reveal());
 
         /** @var ServerRequestInterface $request */
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
 
-        $response = $getUser->handle($request);
+        $response = $showUser->handle($request);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
     }
