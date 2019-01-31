@@ -82,4 +82,16 @@ class GetAllUsersFormatterTest extends TestCase
 
         $this->assertEquals(self::QUANTIDADE, count($formatted));
     }
+
+    /**
+     * Testa retorno de array vazio, quando não formado um array na entrada
+     */
+    public function testReturnEmptyArrayInNotArrayInformated()
+    {
+        $formatted = $this->formatter->format('teste');
+
+        $this->assertEquals(0, count($formatted));
+        $this->assertInternalType('array', $formatted);
+        $this->assertTrue(empty($formatted));
+    }
 }

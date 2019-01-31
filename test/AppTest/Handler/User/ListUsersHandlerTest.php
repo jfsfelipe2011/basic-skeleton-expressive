@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AppTest\Handler\User;
 
-use App\Action\User\GetAllUsersAction;
 use App\Handler\User\ListUsersHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,12 +11,15 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class ListUsersHandlerTest extends TestCase
 {
-    /** @var GetAllUsersAction */
-    private $action;
+    /** @var ListUsersHandler */
+    private $listUsers;
 
     protected function setUp()
     {
-        $this->action = $this->prophesize(GetAllUsersAction::class);
+        $this->listUsers = $this->getMockBuilder(ListUsersHandler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['handle'])
+            ->getMock();
     }
 
     /**
@@ -25,12 +27,13 @@ class ListUsersHandlerTest extends TestCase
      */
     public function testReturnsJsonResponseGetAllUsersHandler()
     {
-        $listUsers = new ListUsersHandler($this->action->reveal());
-
         /** @var ServerRequestInterface $request */
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
 
-        $response = $listUsers->handle($request);
+        $this->listUsers->method('handle')
+            ->willReturn(new JsonResponse([]));
+
+        $response = $this->listUsers->handle($request);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
     }

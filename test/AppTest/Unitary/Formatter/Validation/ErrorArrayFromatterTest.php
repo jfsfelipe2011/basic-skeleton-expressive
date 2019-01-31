@@ -51,4 +51,16 @@ class ErrorArrayFromatterTest extends TestCase
         $this->assertInternalType('array', $formattedData);
         $this->assertTrue(empty($formattedData));
     }
+
+    /**
+     * Testa o retorno de array vazio caso não seja uma string informada
+     */
+    public function testReturnArrayVazioQuandoNaoPassadoUmaString()
+    {
+        $formattedData = $this->formatter->format(4357);
+
+        $this->assertEquals(0, count($formattedData));
+        $this->assertInternalType('array', $formattedData);
+        $this->assertTrue(empty($formattedData));
+    }
 }

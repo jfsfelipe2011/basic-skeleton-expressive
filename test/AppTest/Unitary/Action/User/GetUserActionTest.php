@@ -6,6 +6,7 @@ namespace AppTest\Unitary\Action;
 
 use App\Action\User\GetUserAction;
 use App\Database\Factory\UserEntityFactory;
+use App\Entity\UserEntity;
 use App\Repository\UserRepository;
 use Faker\Generator;
 use Faker\Factory as Faker;
@@ -13,9 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 class GetUserActionTest extends TestCase
 {
-    /** @var UserRepository */
-    private $repository;
-
     /** @var Generator */
     private $faker;
 
@@ -24,12 +22,10 @@ class GetUserActionTest extends TestCase
 
     protected function setUp()
     {
-        /** @var UserRepository $repository */
-        $this->repository = $this->getMockBuilder(UserRepository::class)
+        $this->action = $this->getMockBuilder(GetUserAction::class)
             ->disableOriginalConstructor()
+            ->setMethods(['action'])
             ->getMock();
-
-        $this->action = new GetUserAction($this->repository);
 
         $this->faker = Faker::create();
     }
@@ -47,10 +43,10 @@ class GetUserActionTest extends TestCase
         $userMock = $userFactory($this->faker, 'array');
         $userMock['id'] = $id;
 
-        $this->repository->method('find')
+        $this->action->method('action')
             ->willReturn($userMock);
 
-        $user = $this->repository->find($id);
+        $user = $this->action->action($id);
 
         $this->assertEquals($id, $user['id']);
         $this->assertTrue(array_key_exists('name', $user));

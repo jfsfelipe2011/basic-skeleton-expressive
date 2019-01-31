@@ -15,15 +15,6 @@ use Faker\Factory as Faker;
 
 class AddUserActionTest extends TestCase
 {
-    /** @var UserRepository */
-    private $repository;
-
-    /** @var UserFilter */
-    private $filter;
-
-    /** @var ErrorStringFormatter */
-    private $formatter;
-
     /** @var AddUserAction */
     private $action;
 
@@ -32,22 +23,11 @@ class AddUserActionTest extends TestCase
 
     protected function setUp()
     {
-        /** @var UserRepository $repository */
-        $this->repository = $this->getMockBuilder(UserRepository::class)
+        /** @var AddUserAction $action */
+        $this->action = $this->getMockBuilder(AddUserAction::class)
             ->disableOriginalConstructor()
-            ->setMethods(['insert'])
+            ->setMethods(['action'])
             ->getMock();
-
-        $this->filter = $this->getMockBuilder(UserFilter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        /** @var ErrorStringFormatter $formatter */
-        $this->formatter = $this->getMockBuilder(ErrorStringFormatter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->action = new AddUserAction($this->repository, $this->filter, $this->formatter);
 
         $this->faker = Faker::create();
     }
@@ -64,10 +44,10 @@ class AddUserActionTest extends TestCase
         $userMock = $userFactory($this->faker, 'array');
         $userMock['id'] = $id;
 
-        $this->repository->method('insert')
+        $this->action->method('action')
             ->willReturn($userMock);
 
-        $user = $this->repository->insert([]);
+        $user = $this->action->action([]);
 
         $this->assertEquals($id, $user['id']);
         $this->assertTrue(array_key_exists('name', $user));
@@ -78,24 +58,25 @@ class AddUserActionTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     *
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function testExceptionIsNotValidDataAddUserAction()
     {
-        $this->repository->method('insert')
+        $this->action->method('action')
             ->will($this->throwException(new \InvalidArgumentException));
 
-        $this->repository->insert([]);
+        $this->action->action([]);
     }
 
     /**
      * @expectedException \RuntimeException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function testExceptionIsNotInsertAddUserAction()
     {
-        $this->repository->method('insert')
+        $this->action->method('action')
             ->will($this->throwException(new \RuntimeException));
 
-        $this->repository->insert([]);
+        $this->action->action([]);
     }
 }

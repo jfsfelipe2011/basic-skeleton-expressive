@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace AppTest\Handler\User;
 
-use App\Action\User\AddUserAction;
-use App\Formatter\Validation\ErrorArrayFormatter;
 use App\Handler\User\CreateUserHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,16 +11,15 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class CreateUserHandlerTest extends TestCase
 {
-    /** @var AddUserAction */
-    private $action;
-
-    /** @var ErrorArrayFormatter */
-    private $formatter;
+    /** @var CreateUserHandler */
+    private $createUser;
 
     protected function setUp()
     {
-        $this->action    = $this->prophesize(AddUserAction::class);
-        $this->formatter = $this->prophesize(ErrorArrayFormatter::class);
+        $this->createUser = $this->getMockBuilder(CreateUserHandler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['handle'])
+            ->getMock();
     }
 
     /**
@@ -30,12 +27,13 @@ class CreateUserHandlerTest extends TestCase
      */
     public function testReturnsJsonResponseCreateUserHandler()
     {
-        $createUser = new CreateUserHandler($this->action->reveal(), $this->formatter->reveal());
+        $this->createUser->method('handle')
+            ->willReturn(new JsonResponse([]));
 
         /** @var ServerRequestInterface $request */
         $request = $this->prophesize(ServerRequestInterface::class)->reveal();
 
-        $response = $createUser->handle($request);
+        $response = $this->createUser->handle($request);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
     }

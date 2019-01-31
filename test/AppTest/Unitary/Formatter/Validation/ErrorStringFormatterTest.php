@@ -80,4 +80,20 @@ class ErrorStringFormatterTest extends TestCase
         $this->assertInternalType('string', $formattedData);
         $this->assertTrue(empty($formattedData));
     }
+
+    /**
+     * Testa o retorno de string vazia caso não tenha sido informado um array
+     */
+    public function testReturnStringVaziaQuandoNaoPassadoUmArray()
+    {
+        $formattedData = $this->formatter->format('teste');
+
+        $this->assertInternalType('string', $formattedData);
+        $this->assertTrue(empty($formattedData));
+
+        $formattedData = $this->formatter->format(64546);
+
+        $this->assertInternalType('string', $formattedData);
+        $this->assertTrue(empty($formattedData));
+    }
 }
