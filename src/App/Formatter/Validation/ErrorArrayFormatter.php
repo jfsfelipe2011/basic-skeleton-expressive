@@ -15,6 +15,11 @@ class ErrorArrayFormatter implements FormatterInterface
     public function format($data): array
     {
         $messages = array();
+
+        if (!is_string($data)) {
+            return $messages;
+        }
+
         $data = explode(',', $data);
 
         if (empty($data)) {

@@ -18,6 +18,10 @@ class ErrorStringFormatter implements FormatterInterface
     {
         $stringErros = '';
 
+        if (!is_array($data)) {
+            return $stringErros;
+        }
+
         foreach ($data as $field => $validator) {
             if (!is_array($validator)) {
                 continue;

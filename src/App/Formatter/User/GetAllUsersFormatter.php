@@ -19,6 +19,10 @@ class GetAllUsersFormatter implements FormatterInterface
     {
         $formatted = [];
 
+        if (!is_array($data)) {
+            return $formatted;
+        }
+
         foreach ($data as $user) {
             if (!$user instanceof UserEntity) {
                 continue;
