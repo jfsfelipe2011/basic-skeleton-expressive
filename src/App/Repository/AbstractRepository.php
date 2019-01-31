@@ -192,7 +192,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param int $id
      * @param array $data
      * @param array $types
-     * @return bool
+     * @return array|bool
      * @throws \Doctrine\DBAL\DBALException
      */
     public function update(int $id, array $data, array $types = array())

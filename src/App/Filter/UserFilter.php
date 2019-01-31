@@ -52,7 +52,7 @@ class UserFilter extends InputFilter
 
         $this->add([
             'name'        => 'created_at',
-            'required'    => true,
+            'required'    => false,
             'allow_empty' => false,
             'filters'     => [
                 [ 'name' => StringTrim::class ]

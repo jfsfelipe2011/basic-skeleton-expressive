@@ -11,7 +11,13 @@ use Psr\Container\ContainerInterface;
 
 class CreateUserHandlerFactory
 {
-    public function __invoke(ContainerInterface $container)
+    /**
+     * Cria um novo handler de create
+     *
+     * @param ContainerInterface $container
+     * @return CreateUserHandler
+     */
+    public function __invoke(ContainerInterface $container): CreateUserHandler
     {
         $action    = $container->get(AddUserAction::class);
         $formatter = $container->get(ErrorArrayFormatter::class);
