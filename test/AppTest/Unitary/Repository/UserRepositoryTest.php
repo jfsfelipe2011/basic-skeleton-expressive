@@ -22,7 +22,7 @@ class UserRepositoryTest extends TestCase
     {
         $this->repository = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
-            ->setMethods(['findAll', 'find', 'insert'])
+            ->setMethods(['findAll', 'find', 'insert', 'update'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -163,5 +163,28 @@ class UserRepositoryTest extends TestCase
         $this->assertTrue(array_key_exists('password', $user));
         $this->assertTrue(array_key_exists('email', $user));
         $this->assertTrue(array_key_exists('created_at', $user));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testUpdateUser()
+    {
+        $id = $this->faker->randomDigit();
+
+        $userFactory = new UserEntityFactory();
+        $userMock = $userFactory($this->faker, 'array');
+        $userMock['id'] = $id;
+
+        $nome = $userMock['name'];
+
+        $userMock['name'] = 'Teste da Silva';
+
+        $this->repository->method('update')
+            ->willReturn($userMock);
+
+        $user = $this->repository->update($id, []);
+
+        $this->assertNotEquals($nome, $user['name']);
     }
 }

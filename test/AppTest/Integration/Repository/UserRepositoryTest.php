@@ -102,4 +102,27 @@ class UserRepositoryTest extends AbstractTestIntegration
 
         $this->assertInstanceOf(UserEntity::class, $user);
     }
+
+    /**
+     * Testa update de usuário
+     *
+     * @throws \Exception
+     */
+    public function testUpdateUser()
+    {
+        $id = mt_rand(1, 10);
+
+        $data = [
+            'name'       => 'Teste da Silva',
+            'updated_at' => (new \DateTime())->format('Y-m-d H:i:s')
+        ];
+
+        /** @var UserEntity $user */
+        $user = $this->repository->find($id);
+        $nome = $user->getName();
+
+        $userUpdate = $this->repository->update($id, $data);
+
+        $this->assertNotEquals($nome, $userUpdate['name']);
+    }
 }

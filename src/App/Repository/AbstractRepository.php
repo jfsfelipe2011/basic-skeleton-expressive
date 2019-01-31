@@ -185,4 +185,33 @@ abstract class AbstractRepository implements RepositoryInterface
 
         return $entity;
     }
+
+    /**
+     * Atualiza um registro
+     *
+     * @param int $id
+     * @param array $data
+     * @param array $types
+     * @return bool
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function update(int $id, array $data, array $types = array())
+    {
+        if (empty($data)) {
+            return false;
+        }
+
+        $this->affectedRows = $this->connection->update($this->getTable(), $data, [
+            $this->getPrimaryKey() => $id
+        ], $types);
+
+        if (!$this->affectedRows) {
+            return false;
+        }
+
+        $entity = $this->find($id);
+
+        return $entity->getArrayCopy();
+    }
+
 }
