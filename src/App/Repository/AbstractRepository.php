@@ -235,5 +235,22 @@ abstract class AbstractRepository implements RepositoryInterface
         return true;
     }
 
+    /**
+     * Retorna ultimo id de usuário
+     *
+     * @return int
+     */
+    public function getLastUserId(): int
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
 
+        $stmt = $queryBuilder->select('id')
+            ->from($this->getTable())
+            ->orderBy('id', 'DESC')
+            ->setMaxResults(1)
+            ->execute();
+        $id = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return (int) $id['id'];
+    }
 }
