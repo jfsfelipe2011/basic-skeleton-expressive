@@ -30,7 +30,7 @@ class DeleteUserHandler implements RequestHandlerInterface
         $id = $request->getAttribute('id');
 
         try {
-            $this->action->action((int) $id);
+            $this->action->execute((int) $id);
             return new JsonResponse(['success' => 'Usuário excluido com sucesso'], 200);
         } catch (\Exception $exception) {
             return new JsonResponse(['errors' => [ 'runtime' => $exception->getMessage()]], 400);

@@ -22,7 +22,7 @@ class AlterUserActionTest extends TestCase
     {
         $this->action = $this->getMockBuilder(AlterUserAction::class)
             ->disableOriginalConstructor()
-            ->setMethods(['action'])
+            ->setMethods(['execute'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -46,10 +46,10 @@ class AlterUserActionTest extends TestCase
 
         $userMock['name'] = 'Teste da Silva';
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->willReturn($userMock);
 
-        $user = $this->action->action($id, []);
+        $user = $this->action->execute($id, []);
 
         $this->assertNotEquals($nome, $user['name']);
     }
@@ -62,10 +62,10 @@ class AlterUserActionTest extends TestCase
     {
         $id = $this->faker->randomDigit();
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->will($this->throwException(new \InvalidArgumentException));
 
-        $this->action->action($id, []);
+        $this->action->execute($id, []);
     }
 
     /**
@@ -76,9 +76,9 @@ class AlterUserActionTest extends TestCase
     {
         $id = $this->faker->randomDigit();
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->will($this->throwException(new \RuntimeException));
 
-        $this->action->action($id, []);
+        $this->action->execute($id, []);
     }
 }

@@ -27,7 +27,7 @@ class GetUserAction
      * @param int $id
      * @return mixed
      */
-    public function action(int $id)
+    public function execute(int $id)
     {
         $user = $this->repository->find($id);
 

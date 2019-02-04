@@ -23,7 +23,7 @@ class AddUserActionTest extends TestCase
         /** @var AddUserAction $action */
         $this->action = $this->getMockBuilder(AddUserAction::class)
             ->disableOriginalConstructor()
-            ->setMethods(['action'])
+            ->setMethods(['execute'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -41,10 +41,10 @@ class AddUserActionTest extends TestCase
         $userMock = $userFactory($this->faker, 'array');
         $userMock['id'] = $id;
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->willReturn($userMock);
 
-        $user = $this->action->action([]);
+        $user = $this->action->execute([]);
 
         $this->assertEquals($id, $user['id']);
         $this->assertTrue(array_key_exists('name', $user));
@@ -59,10 +59,10 @@ class AddUserActionTest extends TestCase
      */
     public function testExceptionIsNotValidDataAddUserAction()
     {
-        $this->action->method('action')
+        $this->action->method('execute')
             ->will($this->throwException(new \InvalidArgumentException));
 
-        $this->action->action([]);
+        $this->action->execute([]);
     }
 
     /**
@@ -71,9 +71,9 @@ class AddUserActionTest extends TestCase
      */
     public function testExceptionIsNotInsertAddUserAction()
     {
-        $this->action->method('action')
+        $this->action->method('execute')
             ->will($this->throwException(new \RuntimeException));
 
-        $this->action->action([]);
+        $this->action->execute([]);
     }
 }

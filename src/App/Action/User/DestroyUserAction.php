@@ -30,7 +30,7 @@ class DestroyUserAction
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      * @throws \Exception
      */
-    public function action(int $id)
+    public function execute(int $id)
     {
         if (!$this->repository->find($id)) {
             throw new \Exception('Usuário não encontrado');

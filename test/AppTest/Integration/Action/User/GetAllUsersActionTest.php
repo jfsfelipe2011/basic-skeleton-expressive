@@ -42,7 +42,7 @@ class GetAllUsersActionTest extends AbstractTestIntegration
 
     public function testActionGetAllUsersAction()
     {
-        $users = $this->action->action(0, 0);
+        $users = $this->action->execute(0, 0);
 
         $this->assertInternalType('array', $users);
     }
@@ -53,7 +53,7 @@ class GetAllUsersActionTest extends AbstractTestIntegration
      */
     public function testActionGetAllUsersActionLimitOffset(int $limit, int $offset, int $expected)
     {
-        $users = $this->action->action($limit, $offset);
+        $users = $this->action->execute($limit, $offset);
 
         $this->assertInternalType('array', $users);
         $this->assertEquals($expected, count($users));

@@ -67,7 +67,7 @@ class GetAllUsersActionTest extends TestCase
         $this->formatter->method('format')
             ->willReturn($usersArray);
 
-        $users = $this->action->action($limit, $offset);
+        $users = $this->action->execute($limit, $offset);
 
         $this->assertInternalType('array', $users);
         $this->assertEquals($expected, count($users));

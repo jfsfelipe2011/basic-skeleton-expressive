@@ -37,7 +37,7 @@ class GetUserActionTest extends AbstractTestIntegration
 
     public function testActionGetUserAction()
     {
-        $user = $this->action->action(5);
+        $user = $this->action->execute(5);
 
         $this->assertInternalType('array', $user);
         $this->assertEquals(5, $user['id']);

@@ -39,7 +39,7 @@ class AddUserAction
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function action(array $data): array
+    public function execute(array $data): array
     {
         $data['created_at'] = date('Y-m-d H:i:s');
 

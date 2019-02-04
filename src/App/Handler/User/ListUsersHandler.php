@@ -38,7 +38,7 @@ class ListUsersHandler implements RequestHandlerInterface
         $limit  = $params['limit'] ?? 0;
         $offset = $params['offset'] ?? 0;
 
-        $users = $this->action->action((int) $limit, (int) $offset);
+        $users = $this->action->execute((int) $limit, (int) $offset);
 
         if (empty($users)) {
             return new JsonResponse(

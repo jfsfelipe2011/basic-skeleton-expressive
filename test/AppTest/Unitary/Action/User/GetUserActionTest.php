@@ -24,7 +24,7 @@ class GetUserActionTest extends TestCase
     {
         $this->action = $this->getMockBuilder(GetUserAction::class)
             ->disableOriginalConstructor()
-            ->setMethods(['action'])
+            ->setMethods(['execute'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -43,10 +43,10 @@ class GetUserActionTest extends TestCase
         $userMock = $userFactory($this->faker, 'array');
         $userMock['id'] = $id;
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->willReturn($userMock);
 
-        $user = $this->action->action($id);
+        $user = $this->action->execute($id);
 
         $this->assertEquals($id, $user['id']);
         $this->assertTrue(array_key_exists('name', $user));

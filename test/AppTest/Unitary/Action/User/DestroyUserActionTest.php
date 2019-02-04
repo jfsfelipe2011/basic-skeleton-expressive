@@ -21,7 +21,7 @@ class DestroyUserActionTest extends TestCase
     {
         $this->action = $this->getMockBuilder(DestroyUserAction::class)
             ->disableOriginalConstructor()
-            ->setMethods(['action'])
+            ->setMethods(['execute'])
             ->getMock();
 
         $this->faker = Faker::create();
@@ -37,10 +37,10 @@ class DestroyUserActionTest extends TestCase
     {
         $id = $this->faker->randomDigit();
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->willReturn(true);
 
-        $delete = $this->action->action($id);
+        $delete = $this->action->execute($id);
 
         $this->assertInternalType('boolean', $delete);
         $this->assertTrue($delete);
@@ -56,10 +56,10 @@ class DestroyUserActionTest extends TestCase
     {
         $id = $this->faker->randomDigit();
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->willReturn(false);
 
-        $delete = $this->action->action($id);
+        $delete = $this->action->execute($id);
 
         $this->assertInternalType('boolean', $delete);
         $this->assertFalse($delete);
@@ -74,9 +74,9 @@ class DestroyUserActionTest extends TestCase
     {
         $id = $this->faker->randomDigit();
 
-        $this->action->method('action')
+        $this->action->method('execute')
             ->will($this->throwException(new \Exception));
 
-        $this->action->action($id);
+        $this->action->execute($id);
     }
 }

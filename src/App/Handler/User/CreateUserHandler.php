@@ -42,7 +42,7 @@ class CreateUserHandler implements RequestHandlerInterface
         $data = $request->getParsedBody();
 
         try {
-            $user = $this->action->action($data);
+            $user = $this->action->execute($data);
             return new JsonResponse($user, 201);
         } catch (\InvalidArgumentException $exception) {
             return new JsonResponse($this->formatter->format($exception->getMessage()), 400);

@@ -42,7 +42,7 @@ class AlterUserAction
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Exception
      */
-    public function action(int $id, array $data): array
+    public function execute(int $id, array $data): array
     {
         if (!$this->repository->find($id)) {
             throw new \Exception('Usuário não encontrado');

@@ -45,7 +45,7 @@ class DestroyUserActionTest extends AbstractTestIntegration
     {
         $id = $this->repository->getLastUserId();
 
-        $delete = $this->action->action($id);
+        $delete = $this->action->execute($id);
 
         $this->assertInternalType('boolean', $delete);
         $this->assertTrue($delete);
@@ -61,6 +61,6 @@ class DestroyUserActionTest extends AbstractTestIntegration
         $id = $this->repository->getLastUserId();
         $id++;
 
-        $this->action->action($id);
+        $this->action->execute($id);
     }
 }

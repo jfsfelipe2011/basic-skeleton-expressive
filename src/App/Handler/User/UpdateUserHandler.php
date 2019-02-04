@@ -37,7 +37,7 @@ class UpdateUserHandler implements RequestHandlerInterface
         parse_str(file_get_contents("php://input"),$data);
 
         try {
-            $user = $this->action->action((int) $id, $data);
+            $user = $this->action->execute((int) $id, $data);
             return new JsonResponse($user, 201);
         } catch (\InvalidArgumentException $exception) {
             return new JsonResponse($this->formatter->format($exception->getMessage()), 400);

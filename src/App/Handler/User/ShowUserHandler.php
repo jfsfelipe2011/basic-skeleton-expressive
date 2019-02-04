@@ -34,7 +34,7 @@ class ShowUserHandler implements RequestHandlerInterface
     {
         $id = $request->getAttribute('id');
 
-        $user = $this->action->action((int) $id);
+        $user = $this->action->execute((int) $id);
 
         if (!$user) {
             return new JsonResponse([
