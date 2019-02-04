@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Unitary\Action;
+namespace AppTest\Unitary\Action\User;
 
-use App\Action\User\AddUserAction;
+use App\Action\User\AlterUserAction;
 use App\Database\Factory\UserEntityFactory;
-use Faker\Generator;
 use PHPUnit\Framework\TestCase;
+use Faker\Generator;
 use Faker\Factory as Faker;
 
-class AddUserActionTest extends TestCase
+class AlterUserActionTest extends TestCase
 {
-    /** @var AddUserAction */
+    /** @var AlterUserAction */
     private $action;
 
     /** @var Generator */
@@ -20,8 +20,7 @@ class AddUserActionTest extends TestCase
 
     protected function setUp()
     {
-        /** @var AddUserAction $action */
-        $this->action = $this->getMockBuilder(AddUserAction::class)
+        $this->action = $this->getMockBuilder(AlterUserAction::class)
             ->disableOriginalConstructor()
             ->setMethods(['action'])
             ->getMock();
@@ -30,10 +29,12 @@ class AddUserActionTest extends TestCase
     }
 
     /**
+     * Teste de ação de update de usuário
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Exception
      */
-    public function testActionAddUserAction()
+    public function testActionAlterUserAction()
     {
         $id = $this->faker->randomDigit();
 
@@ -41,39 +42,43 @@ class AddUserActionTest extends TestCase
         $userMock = $userFactory($this->faker, 'array');
         $userMock['id'] = $id;
 
+        $nome = $userMock['name'];
+
+        $userMock['name'] = 'Teste da Silva';
+
         $this->action->method('action')
             ->willReturn($userMock);
 
-        $user = $this->action->action([]);
+        $user = $this->action->action($id, []);
 
-        $this->assertEquals($id, $user['id']);
-        $this->assertTrue(array_key_exists('name', $user));
-        $this->assertTrue(array_key_exists('password', $user));
-        $this->assertTrue(array_key_exists('email', $user));
-        $this->assertTrue(array_key_exists('created_at', $user));
+        $this->assertNotEquals($nome, $user['name']);
     }
 
     /**
      * @expectedException \InvalidArgumentException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function testExceptionIsNotValidDataAddUserAction()
+    public function testExceptionIsNotValidDataAlterUserAction()
     {
+        $id = $this->faker->randomDigit();
+
         $this->action->method('action')
             ->will($this->throwException(new \InvalidArgumentException));
 
-        $this->action->action([]);
+        $this->action->action($id, []);
     }
 
     /**
      * @expectedException \RuntimeException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function testExceptionIsNotInsertAddUserAction()
+    public function testExceptionIsNotUpdateAlterUserAction()
     {
+        $id = $this->faker->randomDigit();
+
         $this->action->method('action')
             ->will($this->throwException(new \RuntimeException));
 
-        $this->action->action([]);
+        $this->action->action($id, []);
     }
 }
