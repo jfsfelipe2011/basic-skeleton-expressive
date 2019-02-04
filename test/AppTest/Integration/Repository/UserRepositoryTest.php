@@ -28,6 +28,9 @@ class UserRepositoryTest extends AbstractTestIntegration
     /** @var Generator */
     private $faker;
 
+    /**
+     * Método setUp do teste de repositorio de usuário
+     */
     protected function setUp()
     {
         parent::setUp();
@@ -37,7 +40,10 @@ class UserRepositoryTest extends AbstractTestIntegration
         $this->faker = Faker::create();
     }
 
-    public function testFindAllUsers()
+    /**
+     * Teste de sucesso ao buscar todos os usuário
+     */
+    public function testFindAllUsersReturnSuccess()
     {
         $users = $this->repository->findAll();
 
@@ -68,9 +74,9 @@ class UserRepositoryTest extends AbstractTestIntegration
     }
 
     /**
-     * Testa a busca de um usuário
+     * Teste de sucesso ao buscar um usuário
      */
-    public function testFindUser()
+    public function testFindUserReturnSuccess()
     {
         $id = mt_rand(1, 10);
 
@@ -87,11 +93,11 @@ class UserRepositoryTest extends AbstractTestIntegration
     }
 
     /**
-     * Testa a criação de um usuário
+     * Teste de sucesso ao inserir um usuário
      *
      * @throws \Exception
      */
-    public function testInsertUser()
+    public function testInsertUserReturnSuccess()
     {
         $userFactory = new UserEntityFactory();
         $data = $userFactory($this->faker, 'array');
@@ -104,11 +110,11 @@ class UserRepositoryTest extends AbstractTestIntegration
     }
 
     /**
-     * Testa update de usuário
+     * Teste de sucesso ao update de um usuário
      *
      * @throws \Exception
      */
-    public function testUpdateUser()
+    public function testUpdateUserReturnSuccess()
     {
         $id = mt_rand(1, 10);
 
@@ -124,5 +130,132 @@ class UserRepositoryTest extends AbstractTestIntegration
         $userUpdate = $this->repository->update($id, $data);
 
         $this->assertNotEquals($nome, $userUpdate['name']);
+    }
+
+    /**
+     * Teste de sucesso ao deletar um usuário
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Exception
+     */
+    public function testDeleteUserReturnSuccess()
+    {
+        $userFactory = new UserEntityFactory();
+        $data = $userFactory($this->faker, 'array');
+
+        $userCreate = $this->repository->insert($data);
+
+        $delete = $this->repository->delete((int) $userCreate['id']);
+
+        $this->assertInternalType('boolean', $delete);
+        $this->assertTrue($delete);
+    }
+
+    /**
+     * Teste retorno string na tabela
+     */
+    public function testGetTableReturnString()
+    {
+        $table = $this->repository->getTable();
+
+        $this->assertInternalType('string', $table);
+        $this->assertEquals(self::TABLE, $table);
+    }
+
+    /**
+     * Teste retorno string na chave primaria
+     */
+    public function testGetPrimaryKeyReturnString()
+    {
+        $primaryKey = $this->repository->getPrimaryKey();
+
+        $this->assertInternalType('string', $primaryKey);
+        $this->assertEquals(self::PRIMARY_KEY, $primaryKey);
+    }
+
+    /**
+     * Teste retorno integer nas linhas afetadas
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Exception
+     */
+    public function testGetAffectedRowsReturnInt()
+    {
+        $userFactory = new UserEntityFactory();
+        $data = $userFactory($this->faker, 'array');
+
+        $this->repository->insert($data);
+        $rows = $this->repository->getAffectedRows();
+
+        $this->assertInternalType('integer', $rows);
+        $this->assertEquals(1, $rows);
+    }
+
+    /**
+     * Teste retorno falso caso não exista o usuário
+     */
+    public function testFindUserReturnFalse()
+    {
+        $id = $this->repository->getLastUserId();
+        $id++;
+
+        $user = $this->repository->find($id);
+
+        $this->assertInternalType('boolean', $user);
+        $this->assertFalse($user);
+    }
+
+    /**
+     * Teste retorno falso caso não seja informado nenhum valor para insert
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function testInsertUserReturnFalse()
+    {
+        $user = $this->repository->insert([]);
+
+        $this->assertInternalType('boolean', $user);
+        $this->assertFalse($user);
+    }
+
+    /**
+     * Teste retorno falso caso não seja informado nenhum valor de update
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function testUpdateUserReturnFalse()
+    {
+        $user = $this->repository->update(1, []);
+
+        $this->assertInternalType('boolean', $user);
+        $this->assertFalse($user);
+    }
+
+    /**
+     * Teste retorno falso ao deletar um usuário
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     */
+    public function testDeleteUserReturnFalse()
+    {
+        $id = $this->repository->getLastUserId();
+        $id++;
+
+        $delete = $this->repository->delete($id);
+
+        $this->assertInternalType('boolean', $delete);
+        $this->assertFalse($delete);
+    }
+
+    /**
+     * Teste retorno integer ao buscar o último id da tabela usuários
+     */
+    public function testGetLastUserIdReturnInt()
+    {
+        $id = $this->repository->getLastUserId();
+
+        $this->assertInternalType('integer', $id);
     }
 }
