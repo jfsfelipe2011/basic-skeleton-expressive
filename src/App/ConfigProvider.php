@@ -50,12 +50,14 @@ class ConfigProvider
                 Action\User\GetUserAction::class           => Action\User\Factory\GetUserActionFactory::class,
                 Action\User\AddUserAction::class           => Action\User\Factory\AddUserActionFactory::class,
                 Action\User\AlterUserAction::class         => Action\User\Factory\AlterUserActionFactory::class,
+                Action\User\DestroyUserAction::class       => Action\User\Factory\DestroyUserActionFactory::class,
 
                 // Handlers
                 Handler\User\ListUsersHandler::class       => Handler\User\Factory\ListUsersHandlerFactory::class,
                 Handler\User\ShowUserHandler::class        => Handler\User\Factory\ShowUserHandlerFactory::class,
                 Handler\User\CreateUserHandler::class      => Handler\User\Factory\CreateUserHandlerFactory::class,
-                Handler\User\UpdateUserHandler::class      => Handler\User\Factory\UpdateUserHandlerFactory::class
+                Handler\User\UpdateUserHandler::class      => Handler\User\Factory\UpdateUserHandlerFactory::class,
+                Handler\User\DeleteUserHandler::class      => Handler\User\Factory\DeleteUserHandlerFactory::class
             ],
         ];
     }

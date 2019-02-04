@@ -36,5 +36,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->get('/users', App\Handler\User\ListUsersHandler::class, 'users.list');
     $app->get('/users/{id:[0-9]+}', App\Handler\User\ShowUserHandler::class, 'users.show');
     $app->post('/users', App\Handler\User\CreateUserHandler::class, 'users.create');
-    $app->put('/users/{id:[0-9]+}', \App\Handler\User\UpdateUserHandler::class, 'users.update');
+    $app->put('/users/{id:[0-9]+}', App\Handler\User\UpdateUserHandler::class, 'users.update');
+    $app->delete('/users/{id:[0-9]+}', App\Handler\User\DeleteUserHandler::class, 'users.delete');
 };

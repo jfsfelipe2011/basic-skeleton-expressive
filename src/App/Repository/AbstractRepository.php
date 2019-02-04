@@ -214,4 +214,26 @@ abstract class AbstractRepository implements RepositoryInterface
         return $entity->getArrayCopy();
     }
 
+    /**
+     * Deleta um registro
+     *
+     * @param int $id
+     * @return bool
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     */
+    public function delete(int $id) : bool
+    {
+        $this->affectedRows = $this->connection->delete($this->getTable(), [
+            $this->getPrimaryKey() => $id
+        ]);
+
+        if (!$this->affectedRows) {
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

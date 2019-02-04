@@ -17,4 +17,7 @@ interface RepositoryInterface
 
     /** Método que deve atualizar um registro */
     public function update(int $id, array $data, array $types);
+
+    /** Método que deve deletar um registro */
+    public function delete(int $id);
 }
